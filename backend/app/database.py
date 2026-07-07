@@ -3,8 +3,13 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import declarative_base
 from pathlib import Path
 
+# DATABASE_PATH = Path(__file__).resolve().parent.parent / "creditsim.db"
+# DATABASE_URL = f"sqlite:///{DATABASE_PATH}"
 DATABASE_PATH = Path(__file__).resolve().parent.parent / "creditsim.db"
-DATABASE_URL = f"sqlite:///{DATABASE_PATH}"
+DATABASE_URL = os.getenv(
+    "DATABASE_URL",
+    f"sqlite:///{DATABASE_PATH}"
+)
 
 engine = create_engine(
     DATABASE_URL,
